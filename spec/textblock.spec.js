@@ -8,13 +8,12 @@ describe('TextBlock class',  () =>  {
 
   describe('isPangram()', () => {
     test('isPangram() is defined', () => {
-
       expect(textBlock.isPangram).toBeDefined();
     });
 
     test('empty sentence',  () => {
-      const textBlock = new TextBlock('');
-
+      // const textBlock = new TextBlock('');
+      textBlock.setup('');
       expect(textBlock.isPangram()).toBe(false);
     });
 
@@ -48,5 +47,43 @@ describe('TextBlock class',  () =>  {
 
   describe('isPalindrome()', () => {
 
+    test('isPangram() is defined', () => {
+      expect(textBlock.isPalindrome).toBeDefined();
+    });
+
+    test('empty sentence',  () => {
+      textBlock.setup('');
+      expect(textBlock.isPalindrome()).toBe(false);
+    });
+
+    test('works with a palindrome with only lower case', () =>  {
+        textBlock.setup('racecar');
+        expect(textBlock.isPalindrome()).toBe(true);
+    });
+
+    test('works with an odd number of letters', () =>  {
+        textBlock.setup('o');
+        expect(textBlock.isPalindrome()).toBe(true);
+    });
+
+    test('works with an even number of letters', () =>  {
+        textBlock.setup('oo');
+        expect(textBlock.isPalindrome()).toBe(true);
+    });
+
+    test('not a palindrome', () =>  {
+        textBlock.setup('rahr rah har har');
+        expect(textBlock.isPalindrome()).toBe(false);
+    });
+
+    test('palindrome with numbers, whitespace, and symbols', function () {
+      textBlock.setup('#9h23 h 0!');
+      expect(textBlock.isPalindrome()).toBe(true);
+    });
+
+    test('is case-insensitive',  () => {
+      textBlock.setup('Too hot to hoot.');
+      expect(textBlock.isPalindrome()).toBe(true);
+    });
   });
 });
